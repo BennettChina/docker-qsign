@@ -13,7 +13,7 @@ docker run -d \
 -p 8080:80 \
 -e COUNT=1 \
 -e ANDROID_ID=<your android_id> \
-bennettwu/qsign-server:1.0.5
+bennettwu/qsign-server:1.1.0
 ```
 
 然后使用 `http://127.0.0.1:8080/sign` 作为签名服务地址即可。
@@ -24,7 +24,7 @@ bennettwu/qsign-server:1.0.5
 version: "3"
 services:
   qsign-server:
-    image: bennettwu/qsign-server:1.0.5
+    image: bennettwu/qsign-server:1.1.0
     ports:
       - "8080:80"
     environment:
@@ -39,8 +39,9 @@ services:
 
 ## 环境变量
 
-| 名称         |      默认值      | 描述                                        |
-|:-----------|:-------------:|:------------------------------------------|
-| COUNT      |       1       | unidbg 实例数量 (建议等于核心数) 【数值越大并发能力越强，内存占用越大】 |
-| ANDROID_ID |       无       | `device.json` 中的 `android_id` 值           |
-| TZ         | Asia/Shanghai | 时区                                        |
+| 名称         |      默认值      | 描述                                                                                       |
+|:-----------|:-------------:|:-----------------------------------------------------------------------------------------|
+| COUNT      |       1       | unidbg 实例数量 (建议等于核心数) 【数值越大并发能力越强，内存占用越大】                                                |
+| ANDROID_ID |       无       | `device.json` 中的 `android_id` 值                                                          |
+| TZ         | Asia/Shanghai | 时区                                                                                       |
+| DYNAMIC    |     false     | 是否开启动态引擎（加速Sign计算，有时候会出现[#52](https://github.com/fuqiuluo/unidbg-fetch-qsign/issues/52)） |
