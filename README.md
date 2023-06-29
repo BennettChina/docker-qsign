@@ -13,7 +13,7 @@ docker run -d \
 -p 8080:80 \
 -e COUNT=1 \
 -e ANDROID_ID=<your android_id> \
-bennettwu/qsign-server:1.0.4
+bennettwu/qsign-server:1.0.5
 ```
 
 然后使用 `http://127.0.0.1:8080/sign` 作为签名服务地址即可。
@@ -24,7 +24,7 @@ bennettwu/qsign-server:1.0.4
 version: "3"
 services:
   qsign-server:
-    image: bennettwu/qsign-server:1.0.4
+    image: bennettwu/qsign-server:1.0.5
     ports:
       - "8080:80"
     environment:
