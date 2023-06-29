@@ -1,0 +1,15 @@
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+
+### VS Code ###
+.vscode/
+
+### MacOS ###
+**/.DS_Store
+
+### git ignore ###
+!.gitignore
