@@ -1,6 +1,6 @@
 FROM alpine AS BASE
 
-ARG QSign_VERSION="1.1.2"
+ARG QSign_VERSION="1.1.3"
 ARG QQ_VERSION="8.9.63"
 
 RUN apk add --no-cache --update \
@@ -23,7 +23,7 @@ RUN apk add --no-cache --update \
 FROM eclipse-temurin:8-jre-alpine
 
 ARG GOSU_VERSION=1.16
-ARG QSign_VERSION="1.1.2"
+ARG QSign_VERSION="1.1.3"
 
 LABEL authors="Bennett"
 LABEL description="QQ签名API服务"
