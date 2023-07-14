@@ -2,7 +2,7 @@
 
 本项目是 [unidbg-fetch-qsign](https://github.com/fuqiuluo/unidbg-fetch-qsign) 的 Docker 镜像源码，基于 `Alpine` 系统编译。
 
-默认使用的是项目中的 `8.9.63` 版本 `.so` 资源，可以通过挂载文件替换 （ `1.1.1` 开始默认使用 `8.9.68` ）。
+默认使用的是项目中的 `8.9.63` 版本 `.so` 资源，可以通过挂载文件替换。
 
 ## 配置文件
 
@@ -47,7 +47,13 @@ QQ 号规则，若未配置该规则将不会响应任何 QQ 号的请求。
 
 ## 快速开始
 
-启动前当前文件夹要有 `txlib` 这个文件夹。
+首先把需要挂载的内容复制到宿主机，避免因为宿主机文件夹空的导致挂载后覆盖容器内的文件夹内容。
+
+```shell
+docker run -d --rm --name tmp_cont bennettwu/qsign-server:1.1.1 sh -c 'sleep 10'  && docker cp tmp_cont:/app/txlib "$(pwd)/"
+```
+
+之后需要修改 `txlib/config.json` 文件中的参数，修改后用挂载方式启动。
 
 ```shell
 docker run -d \
@@ -61,6 +67,12 @@ bennettwu/qsign-server:1.1.1
 然后使用 `http://127.0.0.1:8080/sign` 作为签名服务地址即可。
 
 ## Docker-Compose
+
+同样需要先把挂载的内容复制到宿主机，避免因为宿主机文件夹空的导致挂载后覆盖容器内的文件夹内容，启动前需要修改配置文件。
+
+```shell
+docker run -d --rm --name tmp_cont bennettwu/qsign-server:1.1.1 sh -c 'sleep 10'  && docker cp tmp_cont:/app/txlib "$(pwd)/"
+```
 
 ```yaml
 version: "3"

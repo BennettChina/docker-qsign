@@ -1,7 +1,7 @@
 FROM alpine AS BASE
 
 ARG QSign_VERSION="1.1.1"
-ARG QQ_VERSION="8.9.68"
+ARG QQ_VERSION="8.9.63"
 
 RUN apk add --no-cache --update \
         		ca-certificates &&  \
@@ -25,7 +25,7 @@ FROM eclipse-temurin:8-jre-alpine
 ARG GOSU_VERSION=1.16
 ARG QSign_VERSION="1.1.1"
 
-LABEL authors="bennett"
+LABEL authors="Bennett"
 LABEL description="QQ签名API服务"
 LABEL version="$QSign_VERSION"
 
@@ -74,3 +74,5 @@ WORKDIR /app
 VOLUME /app/txlib
 
 ENTRYPOINT ["sh", "docker-entrypoint.sh"]
+
+CMD ["bin/unidbg-fetch-qsign", "--basePath=/app/txlib"]
