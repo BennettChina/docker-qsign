@@ -37,9 +37,6 @@ QQ 号规则，若未配置该规则将不会响应任何 QQ 号的请求。
   "key": "114514",
   // 启用自动注册实例（需要1.1.4及以上版本才会生效，8.9.68可开启）
   "auto_register": true,
-  // 实例重载间隔
-  // i>=20 i<=50
-  "reload_interval": 40, 
   "protocol": {
     "qua": "V1_AND_SQ_8.9.68_4218_HDBM_T",
     // version和code可以从qua中提取
@@ -65,7 +62,7 @@ QQ 号规则，若未配置该规则将不会响应任何 QQ 号的请求。
 首先把需要挂载的内容复制到宿主机，避免因为宿主机文件夹空的导致挂载后覆盖容器内的文件夹内容。
 
 ```shell
-docker run -d --rm --name tmp_cont bennettwu/qsign-server:1.1.6 sh -c 'sleep 10'  && docker cp tmp_cont:/app/txlib "$(pwd)/"
+docker run -d --rm --name tmp_cont bennettwu/qsign-server:1.1.7 sh -c 'sleep 10'  && docker cp tmp_cont:/app/txlib "$(pwd)/"
 ```
 
 之后需要修改 `txlib/config.json` 文件中的参数，修改后用挂载方式启动。
@@ -76,7 +73,7 @@ docker run -d \
 --restart always \
 -p 8080:80 \
 -v $(pwd)/txlib/:/app/txlib \
-bennettwu/qsign-server:1.1.6
+bennettwu/qsign-server:1.1.7
 ```
 
 然后使用 `http://127.0.0.1:8080/sign?key=114514` 作为签名服务地址即可。
@@ -86,14 +83,14 @@ bennettwu/qsign-server:1.1.6
 同样需要先把挂载的内容复制到宿主机，避免因为宿主机文件夹空的导致挂载后覆盖容器内的文件夹内容，启动前需要修改配置文件。
 
 ```shell
-docker run -d --rm --name tmp_cont bennettwu/qsign-server:1.1.6 sh -c 'sleep 10'  && docker cp tmp_cont:/app/txlib "$(pwd)/"
+docker run -d --rm --name tmp_cont bennettwu/qsign-server:1.1.7 sh -c 'sleep 10'  && docker cp tmp_cont:/app/txlib "$(pwd)/"
 ```
 
 ```yaml
 version: "3"
 services:
   qsign-server:
-    image: bennettwu/qsign-server:1.1.6
+    image: bennettwu/qsign-server:1.1.7
     ports:
       # 如果改了 config.json 中的 port 值则需要跟此处的第二个端口一致
       - "8080:80"
@@ -117,6 +114,7 @@ services:
 
 ## 历史版本
 
+- [1.1.6](https://github.com/BennettChina/docker-qsign/tree/v1.1.6)
 - [1.1.5](https://github.com/BennettChina/docker-qsign/tree/v1.1.5)
 - [1.1.4](https://github.com/BennettChina/docker-qsign/tree/v1.1.4)
 - [1.1.3](https://github.com/BennettChina/docker-qsign/tree/v1.1.3)

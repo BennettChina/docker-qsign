@@ -1,19 +1,20 @@
 FROM alpine AS BASE
 
-ARG QSign_VERSION="1.1.6"
+ARG QSign_VERSION="1.1.7"
 ARG QQ_VERSION="8.9.63"
 
 RUN apk add --no-cache --update \
         		ca-certificates &&  \
-    wget https://github.com/fuqiuluo/unidbg-fetch-qsign/releases/download/$QSign_VERSION/unidbg-fetch-qsign-$QSign_VERSION.zip && \
+    wget https://github.com/fuqiuluo/unidbg-fetch-qsign/releases/download/$QSign_VERSION/Package.zip && \
     wget https://raw.githubusercontent.com/fuqiuluo/unidbg-fetch-qsign/master/txlib/$QQ_VERSION/libQSec.so && \
     wget https://raw.githubusercontent.com/fuqiuluo/unidbg-fetch-qsign/master/txlib/$QQ_VERSION/libfekit.so && \
     wget https://raw.githubusercontent.com/fuqiuluo/unidbg-fetch-qsign/master/txlib/$QQ_VERSION/config.json && \
     wget https://raw.githubusercontent.com/fuqiuluo/unidbg-fetch-qsign/master/txlib/$QQ_VERSION/dtconfig.json && \
     sed -i 's|"port": 8080|"port": 80|' config.json && \
     mkdir -p "/resource/qsign/txlib/" && \
-    unzip -q ./unidbg-fetch-qsign-$QSign_VERSION.zip && \
-    mv ./unidbg-fetch-qsign-$QSign_VERSION/* "/resource/qsign/" && \
+    unzip -q ./Package.zip && \
+    unzip -q ./unidbg-fetch-qsign-${QSign_VERSION}.zip && \
+    mv ./unidbg-fetch-qsign-${QSign_VERSION}/* "/resource/qsign/" && \
     mv libQSec.so "/resource/qsign/txlib/" && \
     mv libfekit.so "/resource/qsign/txlib/" && \
     mv config.json "/resource/qsign/txlib/" && \
@@ -23,7 +24,7 @@ RUN apk add --no-cache --update \
 FROM eclipse-temurin:8-jre-alpine
 
 ARG GOSU_VERSION=1.16
-ARG QSign_VERSION="1.1.6"
+ARG QSign_VERSION="1.1.7"
 
 LABEL authors="Bennett"
 LABEL description="QQ签名API服务"
