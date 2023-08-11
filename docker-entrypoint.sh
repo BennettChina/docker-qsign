@@ -7,7 +7,7 @@ if [ "${1#-}" != "$1" ]; then
 fi
 
 if [ "$1" = 'bin/unidbg-fetch-qsign' ] && [ "$(id -u)" = '0' ]; then
-  chown -R "$(id -u qsign)":"$(id -u qsign)" .
+  find . \! -user qsign -exec chown qsign '{}' +
   exec gosu qsign "$@"
 fi
 

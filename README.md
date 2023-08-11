@@ -1,8 +1,26 @@
-# Docker-Qsign
+<h1 align="center"> Docker-Qsign </h1>
+
+<p align="center">
+    <a href="https://github.com/BennettChina/docker-qsign/actions/workflows/ci.yml">
+        <img src="https://github.com/BennettChina/docker-qsign/actions/workflows/ci.yml/badge.svg" alt="ci status"/>
+    </a>
+    <a href="https://github.com/adoptium/containers/tree/main/8/jre/alpine">
+        <img src="https://img.shields.io/badge/openjdk-8-blue?logo=openjdk" alt="jdk version"/>
+    </a>
+    <a href="https://hub.docker.com/r/bennettwu/qsign-server">
+        <img src="https://img.shields.io/docker/v/bennettwu/qsign-server?logo=docker" alt="docker image version"/>
+    </a>
+    <a href="https://hub.docker.com/r/bennettwu/qsign-server">
+        <img src="https://img.shields.io/docker/image-size/bennettwu/qsign-server" alt="docker image size"/>
+    </a>
+    <a href="https://hub.docker.com/r/bennettwu/qsign-server">
+        <img src="https://img.shields.io/docker/pulls/bennettwu/qsign-server" alt="docker pulls"/>
+    </a>
+</p>
 
 本项目是 [unidbg-fetch-qsign](https://github.com/fuqiuluo/unidbg-fetch-qsign) 的 Docker 镜像源码，基于 `Alpine` 系统编译。
 
-默认使用的是项目中的 `8.9.63` 版本 `.so` 资源，可以通过挂载文件替换。
+默认使用的是项目中的 `8.9.63` 版本 `.so` 资源，可以通过挂载文件替换 。
 
 ## 配置文件
 
@@ -43,7 +61,7 @@ QQ 号规则，若未配置该规则将不会响应任何 QQ 号的请求。
 首先把需要挂载的内容复制到宿主机，避免因为宿主机文件夹空的导致挂载后覆盖容器内的文件夹内容。
 
 ```shell
-docker run -d --rm --name tmp_cont bennettwu/qsign-server:1.1.4 sh -c 'sleep 10'  && docker cp tmp_cont:/app/txlib "$(pwd)/"
+docker run -d --rm --name tmp_cont bennettwu/qsign-server:1.1.5 sh -c 'sleep 10'  && docker cp tmp_cont:/app/txlib "$(pwd)/"
 ```
 
 之后需要修改 `txlib/config.json` 文件中的参数，修改后用挂载方式启动。
@@ -54,7 +72,7 @@ docker run -d \
 --restart always \
 -p 8080:80 \
 -v $(pwd)/txlib/:/app/txlib \
-bennettwu/qsign-server:1.1.4
+bennettwu/qsign-server:1.1.5
 ```
 
 然后使用 `http://127.0.0.1:8080/sign?key=114514` 作为签名服务地址即可。
@@ -64,14 +82,14 @@ bennettwu/qsign-server:1.1.4
 同样需要先把挂载的内容复制到宿主机，避免因为宿主机文件夹空的导致挂载后覆盖容器内的文件夹内容，启动前需要修改配置文件。
 
 ```shell
-docker run -d --rm --name tmp_cont bennettwu/qsign-server:1.1.4 sh -c 'sleep 10'  && docker cp tmp_cont:/app/txlib "$(pwd)/"
+docker run -d --rm --name tmp_cont bennettwu/qsign-server:1.1.5 sh -c 'sleep 10'  && docker cp tmp_cont:/app/txlib "$(pwd)/"
 ```
 
 ```yaml
 version: "3"
 services:
   qsign-server:
-    image: bennettwu/qsign-server:1.1.4
+    image: bennettwu/qsign-server:1.1.5
     ports:
       # 如果改了 config.json 中的 port 值则需要跟此处的第二个端口一致
       - "8080:80"
@@ -93,9 +111,9 @@ services:
 | TZ             | Asia/Shanghai | 时区                                                                                       |
 | ~~DYNAMIC~~    |     false     | 是否开启动态引擎（加速Sign计算，有时候会出现[#52](https://github.com/fuqiuluo/unidbg-fetch-qsign/issues/52)） |
 
-
 ## 历史版本
 
+- [1.1.4](https://github.com/BennettChina/docker-qsign/tree/v1.1.4)
 - [1.1.3](https://github.com/BennettChina/docker-qsign/tree/v1.1.3)
 - [1.1.2](https://github.com/BennettChina/docker-qsign/tree/v1.1.2)
 - [1.1.1](https://github.com/BennettChina/docker-qsign/tree/v1.1.1)
