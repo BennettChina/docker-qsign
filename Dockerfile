@@ -6,7 +6,6 @@ ARG QQ_VERSION="8.9.63"
 RUN apk add --no-cache --update \
         		ca-certificates &&  \
     wget https://github.com/fuqiuluo/unidbg-fetch-qsign/releases/download/$QSign_VERSION/unidbg-fetch-qsign.3.zip && \
-    wget https://raw.githubusercontent.com/fuqiuluo/unidbg-fetch-qsign/master/txlib/$QQ_VERSION/libQSec.so && \
     wget https://raw.githubusercontent.com/fuqiuluo/unidbg-fetch-qsign/master/txlib/$QQ_VERSION/libfekit.so && \
     wget https://raw.githubusercontent.com/fuqiuluo/unidbg-fetch-qsign/master/txlib/$QQ_VERSION/config.json && \
     wget https://raw.githubusercontent.com/fuqiuluo/unidbg-fetch-qsign/master/txlib/$QQ_VERSION/dtconfig.json && \
@@ -15,7 +14,6 @@ RUN apk add --no-cache --update \
     unzip -q ./unidbg-fetch-qsign.3.zip && \
     unzip -q ./unidbg-fetch-qsign-${QSign_VERSION}.zip && \
     mv ./unidbg-fetch-qsign-${QSign_VERSION}/* "/resource/qsign/" && \
-    mv libQSec.so "/resource/qsign/txlib/" && \
     mv libfekit.so "/resource/qsign/txlib/" && \
     mv config.json "/resource/qsign/txlib/" && \
     mv dtconfig.json "/resource/qsign/txlib/"
