@@ -16,7 +16,8 @@ RUN apk add --no-cache --update \
     mv ./unidbg-fetch-qsign-${QSign_VERSION}/* "/resource/qsign/" && \
     mv libfekit.so "/resource/qsign/txlib/" && \
     mv config.json "/resource/qsign/txlib/" && \
-    mv dtconfig.json "/resource/qsign/txlib/"
+    mv dtconfig.json "/resource/qsign/txlib/" && \
+    sed -i 's|4332|4416|' "/resource/qsign/txlib/8.9.73/config.json"
 
 
 FROM eclipse-temurin:8-jre-alpine
