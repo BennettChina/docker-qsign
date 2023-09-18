@@ -18,7 +18,8 @@ RUN apk add --no-cache --update \
     mv dtconfig.json "/resource/qsign/txlib/" && \
     sed -i 's|4332|4416|' "/resource/qsign/txlib/8.9.73/config.json" && \
     cd "/resource/qsign" && \
-    sed -i 's/8080/80/' txlib/*/config.json
+    sed -i 's/8080/80/' txlib/*/config.json && \
+    chmod +x bin/*
 
 
 FROM eclipse-temurin:8-jre-alpine
