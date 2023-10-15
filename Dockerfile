@@ -68,6 +68,7 @@ RUN apk add --no-cache --update \
 
 COPY --from=BASE "/resource/qsign/" "/app/"
 COPY docker-entrypoint.sh /app/
+COPY txlib /app/txlib/
 
 WORKDIR /app
 
